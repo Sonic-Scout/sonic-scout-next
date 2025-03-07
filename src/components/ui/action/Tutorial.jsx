@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export const Tutorial = ({ onClose }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const modalRef = useRef(null);
   
   const slides = [
     {
@@ -48,9 +49,39 @@ export const Tutorial = ({ onClose }) => {
     return () => clearTimeout(timer);
   }, [currentSlide]);
 
+  // Handle clicks outside the modal and ESC key press
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    // Add event listeners
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup event listeners
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-background border border-border shadow-xl rounded-xl max-w-4xl w-full overflow-hidden">
+    <div 
+      className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50"
+    >
+      <div 
+        ref={modalRef}
+        className="bg-background border border-border shadow-xl rounded-xl max-w-4xl w-full overflow-hidden"
+      >
         <div className="relative h-[600px] w-full">
           {/* Carousel track */}
           <div 
