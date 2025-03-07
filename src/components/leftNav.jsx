@@ -1,9 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import RainbowKitConnectButton from "@/components/ui/RainbowKitConnectButton";
+import { useTutorial } from "../context/TutorialContext";
 
 import Link from "next/link";
-import Tutorial from "./ui/action/Tutorial";
 import {
   ChevronRight,
   Edit,
@@ -24,7 +24,7 @@ export default function LeftNav({
   onSelectChat,
 }) {
   const [isCollapsed, setIsCollapsed] = useState(initialCollapsed);
-  const [isOpenTutorial, setIsOpenTutorial] = useState(false);
+  const { openTutorial } = useTutorial();
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
@@ -97,7 +97,7 @@ export default function LeftNav({
               <div className="bg-card pt-0">
                 <div
                   className="block w-full text-left text-base font-medium mb-1 h-9 px-3 py-2 rounded hover:bg-accent"
-                  onClick={() => setIsOpenTutorial(true)}
+                  onClick={openTutorial}
                 >
                   <div className="flex items-center">
                     <div className="flex h-6 w-6 items-center justify-center mr-2.5 text-muted-foreground">
