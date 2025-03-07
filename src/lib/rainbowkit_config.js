@@ -1,7 +1,7 @@
 'use client';
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 import { configDotenv } from 'dotenv';
-import { mainnet, polygon, optimism, arbitrum, base } from 'wagmi/chains';
+import { sonic } from 'wagmi/chains';
 
 // Load environment variables
 configDotenv();
@@ -12,7 +12,7 @@ const projectId = process.env.REOWN_PROJECTID || 'YOUR_PROJECT_ID';
 const rainbowkitConfig = getDefaultConfig({
   appName: 'Sonic Scout',
   projectId,
-  chains: [mainnet, polygon, optimism, arbitrum, base],
+  chains: [sonic],
   ssr: true, // If your dApp uses server side rendering (SSR)
 });
 

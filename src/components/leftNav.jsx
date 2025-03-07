@@ -1,5 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
+import RainbowKitConnectButton from '@/components/ui/RainbowKitConnectButton';
+
 import Link from 'next/link';
 import { 
   Search, 
@@ -127,9 +129,9 @@ export default function LeftNav({
               </div>
             </div>
           
-            {/* <div className="border-t p-3 flex-shrink-0">
-              <ConnectButton />
-            </div> */}
+            <div className="border-t p-3 flex justify-center">
+              <RainbowKitConnectButton />
+            </div>
           </div>
         )}
       </div>

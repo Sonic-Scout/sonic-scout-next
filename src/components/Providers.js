@@ -14,9 +14,7 @@ export default function Providers({ children, rainbowkitConfig }) {
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider 
             modalSize="compact"
-            theme={darkTheme({
-
-            })}
+            theme={darkTheme({})}
         >
           {children}
         </RainbowKitProvider>

@@ -171,7 +171,8 @@
   flex-direction: column;
 }
 [data-rk] .ju367v16 {
-  font-family: var(--rk-fonts-body);
+  /* font-family: var(--rk-fonts-body); */
+  font-family: var(--font-sans);
 }
 [data-rk] .ju367v17 {
   font-size: 12px;
@@ -202,7 +203,7 @@
   line-height: 29px;
 }
 [data-rk] .ju367v1e {
-  font-weight: 400;
+  font-weight: 300;
 }
 [data-rk] .ju367v1f {
   font-weight: 500;
@@ -211,10 +212,10 @@
   font-weight: 600;
 }
 [data-rk] .ju367v1h {
-  font-weight: 700;
+  font-weight: 400;
 }
 [data-rk] .ju367v1i {
-  font-weight: 800;
+  font-weight: 600;
 }
 [data-rk] .ju367v1j {
   gap: 0;
@@ -1085,13 +1086,16 @@
   backdrop-filter: var(--rk-blurs-modalOverlay);
 }
 [data-rk] .ju367v9i {
-  background: var(--rk-colors-accentColor);
+  /* background: var(--rk-colors-accentColor); */
+  background: var(--rk-custom-colors-accentColor);
 }
 [data-rk] .ju367v9j:hover {
-  background: var(--rk-colors-accentColor);
+  /* background: var(--rk-colors-accentColor); */
+  background: var(--rk-custom-colors-accentColor);
 }
 [data-rk] .ju367v9k:active {
-  background: var(--rk-colors-accentColor);
+  /* background: var(--rk-colors-accentColor); */
+  background: var(--rk-custom-colors-accentColor);
 }
 [data-rk] .ju367v9l {
   background: var(--rk-colors-accentColorForeground);

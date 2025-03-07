@@ -3,9 +3,15 @@ import token_list from '@/lib/token_list.json';
 export default async function handler(req, res) {
   const { method, query } = req;
 
+
   if (method === 'GET') {
+    // Check if we're requesting chart data
+    if (query.chart && query.tokenA) {
+      const chartData = await get_price_chart(query.tokenA);
+      return res.status(200).json(chartData);
+    }
     // Check if we're requesting specific addresses or selected preset tokens
-    if (query.addresses) {
+    else if (query.addresses) {
       const addresses = query.addresses.split(',');
       const prices = await get_prices(addresses);
       return res.status(200).json(prices);
@@ -30,8 +36,8 @@ async function get_prices(address = []) {
     // Construct the API URL
     const apiUrl = `https://api.wagmi.com/prices/current/${formattedAddresses}`;
     
-    // Fetch data from the API with a cache policy
-    const response = await fetch(apiUrl, { next: { revalidate: 60 } });
+    // Fetch data from the API with a cache policy of 5 minutes
+    const response = await fetch(apiUrl, { next: { revalidate: 300 } });
     
     // Check if the response is successful
     if (!response.ok) {
@@ -78,3 +84,37 @@ async function get_selected_price() {
   
   return temp;
 }
+
+/**
+ * Fetches price chart data comparing two tokens
+ * @param {string} tokenA - Address of the first token
+ * @param {string} tokenB - Address of the second token
+ * @param {string} unit - Time unit for chart data (h, d, w, m, y)
+ * @returns {Object} Chart data for the token pair
+ */
+async function get_price_chart(tokenA, tokenB='0x29219dd400f2Bf60E5a23d13Be72B486D4038894', unit = 'h') {
+  try {
+    // Chain ID 146 appears to be used (from the example URL)
+    const chainId = 146;
+    
+    // Construct the API URL
+    const apiUrl = `https://api.wagmi.com/prices/chart/${chainId}/${tokenA}/${tokenB}?unit=${unit}`;
+    
+    // Fetch data from the API with a cache policy
+    const response = await fetch(apiUrl, { next: { revalidate: 300 } });  // Cache for 5 minutes
+    
+    // Check if the response is successful
+    if (!response.ok) {
+      console.log(response);
+      throw new Error(`Price chart API call failed with status: ${response.status}`);
+    }
+    
+    // Parse and return the JSON response
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching price chart data:', error);
+    return { chart: [], error: 'Failed to fetch chart data' };
+  }
+}
+
+
