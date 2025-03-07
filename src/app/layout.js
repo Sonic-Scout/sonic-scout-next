@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Providers from "@/components/Providers";
+import rainbowkitConfig from "@/lib/rainbowkit_config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,17 +14,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "SonicScot",
-  description: "SonicScot Next.js Application",
+  title: "Sonic Scout",
+  description:
+    "Sonic Scout is a decentralized application for finding the best NFTs.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="dark" style={{colorScheme: "dark"}}>
+    <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Providers rainbowkitConfig={rainbowkitConfig}>
+          {children}
+        </Providers>
       </body>
     </html>
   );

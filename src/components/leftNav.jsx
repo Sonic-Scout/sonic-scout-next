@@ -127,18 +127,9 @@ export default function LeftNav({
               </div>
             </div>
           
-            {/* Bottom section - fixed at bottom */}
-            <div className="border-t p-3 flex-shrink-0">
-              <button className="w-full flex justify-between items-center border px-3 py-2 rounded">
-                <div className="flex items-center gap-2">
-                  <div className="rounded-full bg-primary/10 h-8 w-8 flex items-center justify-center text-primary">
-                    S
-                  </div>
-                  <span>SonicScout</span>
-                </div>
-                <Settings size={16} className="text-muted-foreground" />
-              </button>
-            </div>
+            {/* <div className="border-t p-3 flex-shrink-0">
+              <ConnectButton />
+            </div> */}
           </div>
         )}
       </div>
