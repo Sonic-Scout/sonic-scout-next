@@ -1,9 +1,6 @@
 import Image from "next/image";
 import AppLayout from "@/components/appLayout";
-
-export const Chat = () => {
-    
-};
+import Chat from "./components/chat";
 
 export default function ChatPage() {
   return (
