@@ -192,7 +192,7 @@ const WidgetChart = (props) => {
     // This represents the approximate timeframe for the last 10 data points
     return {
       change: percentChange,
-      hours: 24 // Fixed value for consistency across all charts
+      hours: 24, // Fixed value for consistency across all charts
     };
   };
 
@@ -209,10 +209,17 @@ const WidgetChart = (props) => {
           <Skeleton className="w-full h-[148px] rounded-md" />
         ) : tokenPrices && tokenPrices.length > 0 ? (
           <div>
-            <div className="tracking-tight text-sm font-normal">
-              {tokenInfo
-                ? `${tokenInfo.name} (${tokenInfo.symbol})`
-                : "Unknown Token"}
+            <div className="flex items-center">
+              {tokenInfo?.logoURI && <img
+                className="h-8 object-contain rounded-full mr-2"
+                src={tokenInfo.logoURI}
+                alt={tokenInfo.symbol}
+              />}
+              <div className="tracking-tight text-sm font-normal">
+                {tokenInfo
+                  ? `${tokenInfo.name} (${tokenInfo.symbol})`
+                  : "Unknown Token"}
+              </div>
             </div>
             <div>
               <div className="text-2xl font-bold">
@@ -227,6 +234,7 @@ const WidgetChart = (props) => {
                 {percentageData.hours} hours
               </p>
             </div>
+
             <ResponsiveContainer width={350} height={80}>
               <LineChart
                 data={tokenPrices}
@@ -251,11 +259,11 @@ const WidgetChart = (props) => {
                   ]}
                   allowDataOverflow={false}
                 />
-                <Tooltip 
+                <Tooltip
                   content={<CustomTooltip />}
-                  position={{ x: 'auto', y: 'auto' }}
-                  coordinate={{ x: 'right', y: 0 }}
-                  cursor={{ stroke: 'hsl(var(--primary))', strokeWidth: 1 }}
+                  position={{ x: "auto", y: "auto" }}
+                  coordinate={{ x: "right", y: 0 }}
+                  cursor={{ stroke: "hsl(var(--primary))", strokeWidth: 1 }}
                 />
                 <Line
                   type="monotone"

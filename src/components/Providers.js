@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
 import { darkTheme, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { useState } from "react";
+import { ChatProvider } from "../context/ChatContext";
 
 export default function Providers({ children, rainbowkitConfig }) {
   // Create a QueryClient instance that persists only for the lifecycle of the component
@@ -16,7 +17,9 @@ export default function Providers({ children, rainbowkitConfig }) {
             modalSize="compact"
             theme={darkTheme({})}
         >
-          {children}
+          <ChatProvider>
+            {children}
+          </ChatProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
