@@ -138,9 +138,9 @@ export default function LeftNav({
                 </div>
               </div>
 
-              <div className="border-t p-3 flex justify-center">
+              {/* <div className="border-t p-3 flex justify-center">
                 <RainbowKitConnectButton />
-              </div>
+              </div> */}
             </div>
           )}
         </div>
