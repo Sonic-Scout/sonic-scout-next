@@ -1,11 +1,12 @@
-import Image from "next/image";
 import AppLayout from "@/components/appLayout";
-import Chat from "./components/chat";
+import ClientChat from "./components/client-chat";
 
-export default function ChatPage() {
+export default function ChatPage({ params }) {
+  const { agentId } = params;
+  
   return (
     <AppLayout>
-        <Chat />
+        <ClientChat agentId={agentId} />
     </AppLayout>
   );
 }

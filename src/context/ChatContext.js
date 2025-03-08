@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useCallback } from 'react';
+import { apiClient } from '@/lib/chat-api';
 
 // Create the context
 const ChatContext = createContext();
@@ -18,6 +19,8 @@ export function ChatProvider({ children }) {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [inputMessage, setInputMessage] = useState("");
+  const [userAgentId, setUserAgentId] = useState(null);
+  const [elizaAgentId, setElizaAgentId] = useState(null);
 
   // Input handling functions
   const updateInputMessage = useCallback((text) => {
@@ -75,6 +78,10 @@ export function ChatProvider({ children }) {
     inputMessage,
     updateInputMessage,
     clearInputMessage,
+    userAgentId,
+    setUserAgentId,
+    elizaAgentId,
+    setElizaAgentId,
   };
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;

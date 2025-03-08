@@ -6,15 +6,22 @@ import ChatMessage from "./chat-message";
 import ChatInput from "./chat-input";
 import { useChat } from "@/context/ChatContext";
 
-const Chat = () => {
-  const { messages, isLoading, sendMessage } = useChat();
+const Chat = (props) => {
+  const { agentId: userAgentId } = props;
+  const { messages, isLoading, sendMessage, setUserAgentId, userAgentId: Ai, elizaAgentId  } = useChat();
+
 
   // Add initial welcome message if there are no messages
   useEffect(() => {
+    setUserAgentId(userAgentId);
+    if(!elizaAgentId || !Ai) return;
+    console.log(`elizaAgentId: ${elizaAgentId}`);
+    console.log(`userAgentId: ${Ai}`);
     if (messages.length === 0) {
       sendMessage("Greetings! I am here to assist you with all aspects of tokenomics. From analyzing token distribution to optimizing market strategies, I'm ready to help you achieve your crypto project's goals.\nHow can I assist you today?", true);
     }
-  }, [messages.length, sendMessage]);
+  }, [messages.length, sendMessage, Ai, elizaAgentId]);
+
 
   const handleSendMessage = async (message) => {
     if (!message.trim()) return;
@@ -24,7 +31,7 @@ const Chat = () => {
   // Convert context messages to the format expected by ChatMessage component
   const formattedMessages = messages.map((msg, index) => ({
     id: index,
-    sender: msg.role === 'user' ? "You" : "SonicScout",
+    sender: msg.role === 'user' ? "You" : "SonicScoutAI",
     content: msg.content,
     timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     isBot: msg.role === 'assistant',

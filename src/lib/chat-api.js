@@ -1,7 +1,7 @@
 // import type { UUID, Character } from "@elizaos/core";
 import { configDotenv } from "dotenv";
 const ENV = configDotenv()?.parsed;
-const BASE_URL = ENV?.ELIZA_URL || `http://localhost:${import.meta.env.VITE_SERVER_PORT}`;
+const BASE_URL = ENV?.ELIZA_URL || `http://localhost:3000`;
 
 const fetcher = async ({
     url,
