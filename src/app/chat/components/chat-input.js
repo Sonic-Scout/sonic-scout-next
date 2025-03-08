@@ -1,17 +1,17 @@
 'use client';
-import { useState } from "react";
+import { useChat } from "@/context/ChatContext";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { SendIcon } from "lucide-react";
 
 const ChatInput = ({ onSendMessage, disabled }) => {
-  const [message, setMessage] = useState("");
+  const { inputMessage, updateInputMessage, clearInputMessage } = useChat();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (message.trim() && !disabled) {
-      onSendMessage(message);
-      setMessage("");
+    if (inputMessage.trim() && !disabled) {
+      onSendMessage(inputMessage);
+      clearInputMessage();
     }
   };
 
@@ -41,8 +41,8 @@ const ChatInput = ({ onSendMessage, disabled }) => {
           <Textarea
             className="min-h-20 max-h-[200px] pr-10 resize-none rounded-xl transition-all focus-visible:ring-0"
             placeholder="Type your message..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            value={inputMessage}
+            onChange={(e) => updateInputMessage(e.target.value)}
             onKeyDown={handleKeyDown}
             rows={1}
             disabled={disabled}
@@ -57,7 +57,7 @@ const ChatInput = ({ onSendMessage, disabled }) => {
           type="submit" 
           size="icon" 
           className="rounded-full h-10 w-10" 
-          disabled={!message.trim() || disabled}
+          disabled={!inputMessage.trim() || disabled}
         >
           <SendIcon className="h-5 w-5" />
           <span className="sr-only">Send</span>

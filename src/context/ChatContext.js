@@ -17,6 +17,16 @@ export const useChat = () => {
 export function ChatProvider({ children }) {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [inputMessage, setInputMessage] = useState("");
+
+  // Input handling functions
+  const updateInputMessage = useCallback((text) => {
+    setInputMessage(text);
+  }, []);
+
+  const clearInputMessage = useCallback(() => {
+    setInputMessage("");
+  }, []);
 
   // Chat action to send a message
   const sendMessage = useCallback(async (message, isSystemMessage = false) => {
@@ -62,6 +72,9 @@ export function ChatProvider({ children }) {
     isLoading,
     sendMessage,
     clearChat,
+    inputMessage,
+    updateInputMessage,
+    clearInputMessage,
   };
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;

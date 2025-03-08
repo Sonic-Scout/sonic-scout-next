@@ -8,12 +8,29 @@ import {
   ArrowRightLeft, 
   RefreshCw, 
   Info,
-  X
+  X,
+  Clock
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useChat } from "@/context/ChatContext";
+import { useRouter } from "next/navigation";
 
 export const Explore = ({ onClose }) => {
   const modalRef = useRef(null);
+  const { sendMessage, updateInputMessage } = useChat();
+  const router = useRouter();
+  
+  const handleCheckBalance = () => {
+    sendMessage("check my balance");
+    onClose();
+    router.push("/chat");
+  };
+
+  const handleTransfer = () => {
+    updateInputMessage("I want to transfer [amount] to [wallet address]");
+    onClose();
+    router.push("/chat");
+  };
   
   const actions = [
     {
@@ -21,28 +38,32 @@ export const Explore = ({ onClose }) => {
       description: "View your current account balance and recent transactions",
       icon: <Wallet className="h-10 w-10 text-primary" />,
       color: "bg-primary/10 hover:bg-primary/20",
-      onClick: () => console.log("Check balance")
+      onClick: handleCheckBalance,
+      available: true
     },
     {
       title: "Transfer",
       description: "Send funds to another account or wallet address",
       icon: <ArrowRightLeft className="h-10 w-10 text-primary" />,
       color: "bg-primary/10 hover:bg-primary/20",
-      onClick: () => console.log("Transfer")
+      onClick: handleTransfer,
+      available: true
     },
     {
       title: "Swap",
       description: "Exchange between different tokens and currencies",
       icon: <RefreshCw className="h-10 w-10 text-primary" />,
       color: "bg-primary/10 hover:bg-primary/20",
-      onClick: () => console.log("Swap")
+      onClick: () => console.log("Swap"),
+      available: false
     },
     {
       title: "Token Info",
       description: "View detailed information about specific tokens",
       icon: <Info className="h-10 w-10 text-primary" />,
       color: "bg-primary/10 hover:bg-primary/20",
-      onClick: () => console.log("Token info")
+      onClick: () => console.log("Token info"),
+      available: false
     }
   ];
 
@@ -101,11 +122,11 @@ export const Explore = ({ onClose }) => {
             {actions.map((action, index) => (
               <Card 
                 key={index}
-                className="overflow-hidden transition-all duration-300 hover:shadow-lg border-border hover:border-primary/50 group"
+                className="overflow-hidden transition-all duration-300 hover:shadow-lg border-border hover:border-primary/50 group relative"
               >
                 <CardContent 
                   className="p-6 flex items-start gap-4 cursor-pointer"
-                  onClick={action.onClick}
+                  onClick={action.available ? action.onClick : undefined}
                 >
                   <div className={cn(
                     "p-3 rounded-xl transition-colors", 
@@ -121,12 +142,19 @@ export const Explore = ({ onClose }) => {
                       {action.description}
                     </p>
                   </div>
+                  
+                  {!action.available && (
+                    <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center rounded-lg">
+                      <div className="bg-card/70 px-4 py-2 rounded-md shadow-lg flex items-center gap-2 border border-border">
+                        <Clock className="h-4 w-4 text-muted-foreground" />
+                        <span className="font-medium text-foreground">Coming Soon</span>
+                      </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}
           </div>
-          
-
         </div>
       </div>
     </div>
