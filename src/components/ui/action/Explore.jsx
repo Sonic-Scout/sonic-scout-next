@@ -73,7 +73,7 @@ export const Explore = ({ onClose }) => {
 
   return (
     <div 
-      className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50"
       aria-modal="true"
       role="dialog"
       aria-labelledby="actions-title"
@@ -126,9 +126,7 @@ export const Explore = ({ onClose }) => {
             ))}
           </div>
           
-          <div className="mt-10 text-center text-sm text-muted-foreground">
-            Press ESC or click outside to close
-          </div>
+
         </div>
       </div>
     </div>

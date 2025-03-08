@@ -49,38 +49,45 @@ export const Tutorial = ({ onClose }) => {
     return () => clearTimeout(timer);
   }, [currentSlide]);
 
-  // Handle clicks outside the modal and ESC key press
+  // Handle ESC key press only
   useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        onClose();
-      }
-    };
-
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         onClose();
       }
     };
 
-    // Add event listeners
-    document.addEventListener("mousedown", handleOutsideClick);
     document.addEventListener("keydown", handleKeyDown);
 
-    // Cleanup event listeners
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [onClose]);
 
+  // Separate handling of backdrop clicks
+  const handleBackdropClick = (event) => {
+    // Only handle clicks directly on the backdrop element
+    // not on any of its children
+    if (event.target === event.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
     <div 
-      className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50"
+      className="fixed inset-0 z-50 flex items-center justify-center"
     >
+      {/* Backdrop - separate from the modal content */}
+      <div 
+        className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+        onClick={handleBackdropClick}
+        aria-hidden="true"
+      />
+      
+      {/* Modal content */}
       <div 
         ref={modalRef}
-        className="bg-background border border-border shadow-xl rounded-xl max-w-4xl w-full overflow-hidden"
+        className="relative z-10 bg-background border border-border shadow-xl rounded-xl max-w-4xl w-full overflow-hidden"
       >
         <div className="relative h-[600px] w-full">
           {/* Carousel track */}
@@ -102,12 +109,14 @@ export const Tutorial = ({ onClose }) => {
                   
                   {/* Example UI element for visual interest */}
                   <div className="w-full h-40 rounded-xl bg-background/50 backdrop-blur-sm shadow-lg mb-8 flex items-center justify-center">
-                    <div className="w-3/4 h-1/2 rounded-lg bg-primary/20 animate-pulse"></div>
+                    <div className="w-3/4 h-1/2 rounded-lg bg-primary/20 animate-pulse">
+                    {}
+                    </div>
                   </div>
                   
-                  <div className="text-sm text-muted-foreground">
+                  {/* <div className="text-sm text-muted-foreground">
                     Slide {index + 1} of {slides.length}
-                  </div>
+                  </div> */}
                 </div>
               </div>
             ))}
@@ -149,8 +158,8 @@ export const Tutorial = ({ onClose }) => {
         </div>
         
         {/* Footer */}
-        <div className="p-6 flex justify-between items-center border-t border-border bg-card">
-          <p className="text-sm text-muted-foreground">Press ESC or click Close to exit the tutorial</p>
+        <div className="p-6 flex justify-end items-center border-t border-border bg-card">
+          {/* <p className="text-sm text-muted-foreground">Press ESC or click outside to exit the tutorial</p> */}
           <Button 
             variant="default"
             onClick={onClose}
