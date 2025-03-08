@@ -10,13 +10,14 @@ export function LoginProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const showLog = false;
   
   // Use Wagmi's useAccount hook to get wallet connection information
   const { address, isConnected, isConnecting, status } = useAccount();
 
   // Handle wallet connection state changes
   useEffect(() => {
-    console.log(`Wallet connection state changed: ${status}, address: ${address}, isConnected: ${isConnected}`);
+    if (showLog) console.info(`Wallet connection state changed: ${status}, address: ${address}, isConnected: ${isConnected}`);
     
     if (isConnected && address) {
       // Handle wallet connection
@@ -87,7 +88,7 @@ export function LoginProvider({ children }) {
 
   // Check if user is already logged in on mount
   useEffect(() => {
-    console.log("Checking for stored user with isConnected:", isConnected);
+    if(showLog) console.info("Checking for stored user with isConnected:", isConnected);
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {
@@ -95,7 +96,7 @@ export function LoginProvider({ children }) {
         // If we have a wallet user but no active wallet connection,
         // don't restore the user
         if (parsedUser.type === 'wallet' && !isConnected) {
-          console.log("Found wallet user but wallet is not connected, removing");
+          if(showLog) console.log("Found wallet user but wallet is not connected, removing");
           localStorage.removeItem('user');
         } else {
           console.log("Restoring user:", parsedUser.type);

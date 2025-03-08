@@ -4,13 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { SendIcon } from "lucide-react";
 
-const ChatInput = ({ onSendMessage }) => {
+const ChatInput = ({ onSendMessage, disabled }) => {
   const [message, setMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSendMessage(message);
-    setMessage("");
+    if (message.trim() && !disabled) {
+      onSendMessage(message);
+      setMessage("");
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -43,6 +45,7 @@ const ChatInput = ({ onSendMessage }) => {
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}
             rows={1}
+            disabled={disabled}
           />
           
           <div className="absolute right-2 bottom-2.5 text-xs text-muted-foreground">
@@ -54,7 +57,7 @@ const ChatInput = ({ onSendMessage }) => {
           type="submit" 
           size="icon" 
           className="rounded-full h-10 w-10" 
-          disabled={!message.trim()}
+          disabled={!message.trim() || disabled}
         >
           <SendIcon className="h-5 w-5" />
           <span className="sr-only">Send</span>

@@ -126,9 +126,9 @@ export default function WidgetPrice() {
           <div className="space-y-2 px-1">
             {tokenPrices.map((token, index) => (
               <TooltipProvider key={token.address || index}>
-                <Tooltip>
+                <Tooltip >
                   <TooltipTrigger className="w-full">
-                    <button
+                    <div
                       key={index}
                       className="relative rounded-lg overflow-hidden group transition-all duration-300 w-full"
                     >
@@ -180,9 +180,9 @@ export default function WidgetPrice() {
                           </div>
                         </div>
                       </div>
-                    </button>
+                    </div>
                   </TooltipTrigger>
-                  <TooltipContent side="right" sideOffset={1} className="text-xs text-white bg-transparent border-black" hideArrow>
+                  <TooltipContent side="right" sideOffset={1} className="text-xs text-white bg-transparent border-black">
                     <WidgetChart tokenA={token.address} key={'widget-price'} />
                   </TooltipContent>
                 </Tooltip>

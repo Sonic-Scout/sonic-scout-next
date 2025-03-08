@@ -19,37 +19,36 @@ export function ChatProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
 
   // Chat action to send a message
-  const sendMessage = useCallback(async (message) => {
+  const sendMessage = useCallback(async (message, isSystemMessage = false) => {
     try {
-      setIsLoading(true);
-      
-      // Add user message to the chat
-      setMessages(prev => [...prev, { role: 'user', content: message }]);
-      
-      // Here you would typically make an API call to your chat service
-      // For example:
-      // const response = await fetch('/api/chat', {
-      //   method: 'POST',
-      //   body: JSON.stringify({ message }),
-      //   headers: { 'Content-Type': 'application/json' }
-      // });
-      // const data = await response.json();
-      
-      // For demonstration, let's simulate a response
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Add response to the chat
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: `This is a response to: "${message}"` 
-      }]);
+      // If it's a system/welcome message, don't set loading state
+      if (!isSystemMessage) {
+        setIsLoading(true);
+        console.log('Sending message:', message);
+        // Add user message to the chat
+        setMessages(prev => [...prev, { role: 'user', content: message }]);
+        
+        // Simulate API call delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Add assistant response
+        setMessages(prev => [...prev, { 
+          role: 'assistant', 
+          content: `This is a response to: "${message}"` 
+        }]);
+      } else {
+        // Add system/welcome message directly as assistant message
+        setMessages(prev => [...prev, { role: 'assistant', content: message }]);
+      }
       
       return { success: true };
     } catch (error) {
       console.error('Error sending message:', error);
       return { success: false, error };
     } finally {
-      setIsLoading(false);
+      if (!isSystemMessage) {
+        setIsLoading(false);
+      }
     }
   }, []);
 

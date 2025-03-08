@@ -1,34 +1,34 @@
 'use client';
-import { useState } from "react";
+import { useEffect } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ChatHeader from "./chat-header";
 import ChatMessage from "./chat-message";
 import ChatInput from "./chat-input";
+import { useChat } from "@/context/ChatContext";
 
 const Chat = () => {
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      sender: "SonicScout",
-      content: "Greetings! I am here to assist you with all aspects of tokenomics. From analyzing token distribution to optimizing market strategies, I'm ready to help you achieve your crypto project's goals.\nHow can I assist you today?",
-      timestamp: "07:36 PM",
-      isBot: true,
-    },
-  ]);
+  const { messages, isLoading, sendMessage } = useChat();
 
-  const handleSendMessage = (message) => {
+  // Add initial welcome message if there are no messages
+  useEffect(() => {
+    if (messages.length === 0) {
+      sendMessage("Greetings! I am here to assist you with all aspects of tokenomics. From analyzing token distribution to optimizing market strategies, I'm ready to help you achieve your crypto project's goals.\nHow can I assist you today?", true);
+    }
+  }, [messages.length, sendMessage]);
+
+  const handleSendMessage = async (message) => {
     if (!message.trim()) return;
-    
-    const newMessage = {
-      id: Date.now(),
-      sender: "You",
-      content: message,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      isBot: false,
-    };
-    
-    setMessages([...messages, newMessage]);
+    await sendMessage(message);
   };
+
+  // Convert context messages to the format expected by ChatMessage component
+  const formattedMessages = messages.map((msg, index) => ({
+    id: index,
+    sender: msg.role === 'user' ? "You" : "SonicScout",
+    content: msg.content,
+    timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    isBot: msg.role === 'assistant',
+  }));
 
   return (
     <div className="flex h-[calc(100vh-1rem)] w-full flex-col bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -37,7 +37,7 @@ const Chat = () => {
       <div id="chatContainer" className="relative flex-1 p-4 pb-0 overflow-hidden">
         <ScrollArea className="h-full">
           <div className="space-y-5">
-            {messages.map((message) => (
+            {formattedMessages.map((message) => (
               <ChatMessage 
                 key={message.id} 
                 sender={message.sender} 
@@ -46,11 +46,16 @@ const Chat = () => {
                 isBot={message.isBot} 
               />
             ))}
+            {isLoading && (
+              <div className="flex items-center space-x-2 text-muted-foreground">
+                <div className="animate-pulse">SonicScout is typing...</div>
+              </div>
+            )}
           </div>
         </ScrollArea>
       </div>
       
-      <ChatInput onSendMessage={handleSendMessage} />
+      <ChatInput onSendMessage={handleSendMessage} disabled={isLoading} />
     </div>
   );
 };
