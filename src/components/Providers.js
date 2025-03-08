@@ -7,6 +7,7 @@ import { useState } from "react";
 import { ChatProvider } from "../context/ChatContext";
 import { TutorialProvider } from "../context/TutorialContext";
 import { ExploreProvider } from "../context/ExploreContext";
+import { LoginProvider } from "../context/LoginContext";
 
 export default function Providers({ children, rainbowkitConfig }) {
   // Create a QueryClient instance that persists only for the lifecycle of the component
@@ -19,13 +20,15 @@ export default function Providers({ children, rainbowkitConfig }) {
             modalSize="compact"
             theme={darkTheme({})}
         >
-          <ChatProvider>
-            <TutorialProvider>
-              <ExploreProvider>
-                {children}
-              </ExploreProvider>
-            </TutorialProvider>
-          </ChatProvider>
+          <LoginProvider>
+            <ChatProvider>
+              <TutorialProvider>
+                <ExploreProvider>
+                  {children}
+                </ExploreProvider>
+              </TutorialProvider>
+            </ChatProvider>
+          </LoginProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
