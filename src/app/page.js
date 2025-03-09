@@ -55,7 +55,7 @@ function FloatingPaths({ position }) {
 export default function BackgroundPaths() {
   const router = useRouter();
   const title = "Sonic Scout";
-  const subtitle = "AI Agent on Sonic Chain";
+  const subtitle = "Your AI-powered DeFi assistant";
   const words = title.split(" ");
   const UUID = getUserId();
 
@@ -183,12 +183,10 @@ export default function BackgroundPaths() {
                   whileHover={{ scale: 1.05, rotate: 5 }}
                   className="w-12 h-12 mb-3 flex items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
                 </motion.div>
-                <h3 className="font-bold text-foreground">Ultra Fast</h3>
-                <p className="text-sm text-muted-foreground text-center">Powered by Sonic Chain for lightning-fast responses</p>
+                <h3 className="font-bold text-foreground">AI-Powered DeFi Insights</h3>
+                <p className="text-sm text-muted-foreground text-center">Get real-time analysis on tokenomics, social sentiment, and market trends.</p>
               </div>
               
               <div className="flex flex-col items-center p-4 rounded-xl bg-card dark:bg-card border border-border">
@@ -196,12 +194,10 @@ export default function BackgroundPaths() {
                   whileHover={{ scale: 1.05, rotate: -5 }}
                   className="w-12 h-12 mb-3 flex items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock-open"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
                 </motion.div>
-                <h3 className="font-bold text-foreground">Secure</h3>
-                <p className="text-sm text-muted-foreground text-center">Enterprise-grade security with blockchain verification</p>
+                <h3 className="font-bold text-foreground">Unlock the Future of DeFi</h3>
+                <p className="text-sm text-muted-foreground text-center">Connect with Twitter and instantly get a non-custodial wallet</p>
               </div>
               
               <div className="flex flex-col items-center p-4 rounded-xl bg-card dark:bg-card border border-border">
@@ -209,12 +205,10 @@ export default function BackgroundPaths() {
                   whileHover={{ scale: 1.05, rotate: 5 }}
                   className="w-12 h-12 mb-3 flex items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bring-to-front"><rect x="8" y="8" width="8" height="8" rx="2"/><path d="M4 10a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2"/><path d="M14 20a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2"/></svg>
                 </motion.div>
-                <h3 className="font-bold text-foreground">Intelligent</h3>
-                <p className="text-sm text-muted-foreground text-center">Advanced AI with deep learning capabilities</p>
+                <h3 className="font-bold text-foreground">Simplifies Your DeFi Journey</h3>
+                <p className="text-sm text-muted-foreground text-center">Advanced AI tools to analyze, invest, and grow your portfolio with confidence.</p>
               </div>
             </div>
           </motion.div>
