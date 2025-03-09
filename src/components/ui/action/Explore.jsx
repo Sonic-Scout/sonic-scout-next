@@ -21,15 +21,23 @@ export const Explore = ({ onClose }) => {
   const router = useRouter();
   
   const handleCheckBalance = () => {
-    sendMessage("check my balance");
+    sendMessage("Can you check my balance?");
     onClose();
-    // router.push("/chat");
   };
 
   const handleTransfer = () => {
     updateInputMessage("I want to transfer [amount] to [wallet address]");
     onClose();
-    // router.push("/chat");
+  };
+  
+  const handleTokenList = () => {
+    sendMessage("Give me the top 5 tokens and their prices.");
+    onClose();
+  };
+
+  const handleTokenInfo = () => {
+    sendMessage("Give me information about Sonic and its tokenomics.");
+    onClose();
   };
   
   const actions = [
@@ -50,20 +58,20 @@ export const Explore = ({ onClose }) => {
       available: true
     },
     {
-      title: "Swap",
-      description: "Exchange between different tokens and currencies",
+      title: "Token List",
+      description: "View a list of available tokens and their details",
       icon: <RefreshCw className="h-10 w-10 text-primary" />,
       color: "bg-primary/10 hover:bg-primary/20",
-      onClick: () => console.log("Swap"),
-      available: false
+      onClick: handleTokenList,
+      available: true
     },
     {
       title: "Token Info",
       description: "View detailed information about specific tokens",
       icon: <Info className="h-10 w-10 text-primary" />,
       color: "bg-primary/10 hover:bg-primary/20",
-      onClick: () => console.log("Token info"),
-      available: false
+      onClick: handleTokenInfo,
+      available: true
     }
   ];
 

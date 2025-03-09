@@ -1,5 +1,5 @@
 'use client';
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 
@@ -43,6 +43,7 @@ const ChatMessage = ({ sender, content, timestamp, isBot, url }) => {
         : "bg-secondary/50"
     } ${isBot ? "mr-12" : "ml-12"} transition-all`}>
       <Avatar className={`h-8 w-8 shrink-0 ${!isBot && "order-last"}`}>
+        {isBot &&(<AvatarImage src="/sonic-icon.png" alt={sender} />)}
         <AvatarFallback className={`${
           isBot 
             ? "bg-primary text-primary-foreground" 
