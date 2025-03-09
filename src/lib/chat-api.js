@@ -1,5 +1,5 @@
 // import type { UUID, Character } from "@elizaos/core";
-const BASE_URL = process?.env?.NEXT_PUBLIC_ELIZA_URL ?? `http://api.sonicscout.tech`;
+const BASE_URL = process?.env?.NEXT_PUBLIC_ELIZA_URL ?? `https://api.sonicscout.tech`;
 console.log(`BASE_URL >>>`, process.env.NEXT_PUBLIC_ELIZA_URL);
 
 const fetcher = async ({
