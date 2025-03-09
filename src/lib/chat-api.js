@@ -72,6 +72,7 @@ export const apiClient = {
         formData.append("text", message);
         formData.append("user", "user");
         formData.append("userId", userId );
+        formData.append("roomId", `room-${userId}-${agentId}`);
 
         if (selectedFile) {
             formData.append("file", selectedFile);
