@@ -4,24 +4,27 @@ import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Image from 'next/image'
+import Image from "next/image";
 
 export const Tutorial = ({ onClose }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const modalRef = useRef(null);
-  
+
   const slides = [
     {
       title: "Welcome to SonicScout AI",
-      content: "Your AI-powered DeFi assistant. Explore, analyze, and invest in promising DeFi projects—all in one place.  ",
+      content:
+        "Your AI-powered DeFi assistant. Explore, analyze, and invest in promising DeFi projects—all in one place.  ",
       color: "bg-gradient-to-br from-primary/20 to-primary/10",
-      image: "/tuts-1.jpg"
+      image: "/tuts-1.jpg",
     },
-    // {
-    //   title: "Discover New Features",
-    //   content: "Our intuitive interface makes it easy to organize, filter, and find exactly what you're looking for.",
-    //   color: "bg-gradient-to-br from-secondary/20 to-secondary/10"
-    // },
+    {
+      title: "Find High-Potential Projects",
+      content:
+        "Access AI-driven insights on tokenomics, team credibility, and market trends.",
+      color: "bg-gradient-to-br from-secondary/20 to-secondary/10",
+      image: "/tuts-3.png",
+    },
     // {
     //   title: "Personalized Experience",
     //   content: "Customize your dashboard and get recommendations tailored to your unique music preferences.",
@@ -46,8 +49,8 @@ export const Tutorial = ({ onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       nextSlide();
-    }, 5000);
-    
+    }, 7000);
+
     return () => clearTimeout(timer);
   }, [currentSlide]);
 
@@ -76,29 +79,27 @@ export const Tutorial = ({ onClose }) => {
   };
 
   return (
-    <div 
-      className="fixed inset-0 z-50 flex items-center justify-center"
-    >
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop - separate from the modal content */}
-      <div 
+      <div
         className="absolute inset-0 bg-black/20 backdrop-blur-sm"
         onClick={handleBackdropClick}
         aria-hidden="true"
       />
-      
+
       {/* Modal content */}
-      <div 
+      <div
         ref={modalRef}
         className="relative z-10 bg-background border border-border shadow-xl rounded-xl max-w-4xl w-full overflow-hidden"
       >
         <div className="relative h-[600px] w-full">
           {/* Carousel track */}
-          <div 
+          <div
             className="h-full transition-transform duration-500 ease-out flex"
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
           >
             {slides.map((slide, index) => (
-              <div 
+              <div
                 key={index}
                 className={cn(
                   "min-w-full h-full flex flex-col items-center justify-center p-12",
@@ -106,11 +107,15 @@ export const Tutorial = ({ onClose }) => {
                 )}
               >
                 <div className="max-w-lg text-center">
-                  <h2 className="text-4xl font-bold mb-6 text-foreground">{slide.title}</h2>
-                  <p className="text-xl text-muted-foreground mb-8">{slide.content}</p>
-                  
+                  <h2 className="text-4xl font-bold mb-6 text-foreground">
+                    {slide.title}
+                  </h2>
+                  <p className="text-xl text-muted-foreground mb-8">
+                    {slide.content}
+                  </p>
+
                   {/* Example UI element for visual interest */}
-                  <div className="w-full max-h-48 rounded-xl shadow-lg mt-8 flex items-center justify-center">
+                  <div className="w-full max-h-48 rounded-xl shadow-lg mt-12 flex items-center justify-center">
                     {slide.image ? (
                       <Image
                         src={slide.image}
@@ -118,15 +123,13 @@ export const Tutorial = ({ onClose }) => {
                         width={418}
                         height={235}
                         priority
-                        unoptimized={true}
-                        className="h-[235px] max-h-full max-w-full rounded-lg object-cover" />
+                        className="h-[235px] max-h-full max-w-full rounded-lg object-cover"
+                      />
                     ) : (
-                      <div className="w-3/4 h-1/2 rounded-lg bg-primary/20 animate-pulse">
-                      </div>
+                      <div className="w-3/4 h-1/2 rounded-lg bg-primary/20 animate-pulse"></div>
                     )}
-
                   </div>
-                  
+
                   {/* <div className="text-sm text-muted-foreground">
                     Slide {index + 1} of {slides.length}
                   </div> */}
@@ -134,26 +137,26 @@ export const Tutorial = ({ onClose }) => {
               </div>
             ))}
           </div>
-          
+
           {/* Navigation arrows */}
-          <Button 
-            variant="ghost" 
-            size="icon" 
+          <Button
+            variant="ghost"
+            size="icon"
             className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-background/50 backdrop-blur-sm hover:bg-background/80 text-foreground"
             onClick={prevSlide}
           >
             <ChevronLeft className="h-6 w-6" />
           </Button>
-          
-          <Button 
-            variant="ghost" 
-            size="icon" 
+
+          <Button
+            variant="ghost"
+            size="icon"
             className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-background/50 backdrop-blur-sm hover:bg-background/80 text-foreground"
             onClick={nextSlide}
           >
             <ChevronRight className="h-6 w-6" />
           </Button>
-          
+
           {/* Indicators */}
           <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2">
             {slides.map((_, index) => (
@@ -169,14 +172,11 @@ export const Tutorial = ({ onClose }) => {
             ))}
           </div>
         </div>
-        
+
         {/* Footer */}
         <div className="p-6 flex justify-end items-center border-t border-border bg-card">
           {/* <p className="text-sm text-muted-foreground">Press ESC or click outside to exit the tutorial</p> */}
-          <Button 
-            variant="default"
-            onClick={onClose}
-          >
+          <Button variant="default" onClick={onClose}>
             Close
           </Button>
         </div>
