@@ -101,7 +101,7 @@ export default function LeftNav({
                 {/* Main menu items */}
                 <div className="bg-card pt-0">
                   <div
-                    className="block w-full text-left text-base font-medium mb-1 h-9 px-3 py-2 rounded hover:bg-accent"
+                    className="block w-full text-left text-base font-medium mb-1 h-9 px-3 py-2 rounded hover:bg-accent cursor-pointer"
                     onClick={openTutorial}
                   >
                     <div className="flex items-center">

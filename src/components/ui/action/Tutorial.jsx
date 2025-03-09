@@ -15,7 +15,7 @@ export const Tutorial = ({ onClose }) => {
       title: "Welcome to SonicScout AI",
       content: "Your AI-powered DeFi assistant. Explore, analyze, and invest in promising DeFi projects—all in one place.  ",
       color: "bg-gradient-to-br from-primary/20 to-primary/10",
-      image: "/tut-1.png"
+      image: "/tuts-1.jpg"
     },
     // {
     //   title: "Discover New Features",

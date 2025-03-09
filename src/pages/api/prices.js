@@ -61,8 +61,8 @@ async function get_selected_price() {
     "0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
     "0x50c42dEAcD8Fc9773493ED674b675bE577f2634b",
     "0x50c42dEAcD8Fc9773493ED674b675bE577f2634b",
-    "0x068e9e009fDa970fA953E1f6a43D982cA991F4bA",
-    // "0x851feE47C6588506277c439A7526aE58cD1d15e5", // ODIN
+    // "0x068e9e009fDa970fA953E1f6a43D982cA991F4bA",
+    "0x851feE47C6588506277c439A7526aE58cD1d15e5", // ODIN
   ];
   
   const selected_tokens = tokens.filter(token => address.includes(token.address));
