@@ -15,7 +15,7 @@ export const generateUserId = () => {
 
 export const getUserId = () => {
     if (typeof window !== 'undefined') {
-        return localStorage.getItem('userId');
+        return localStorage.getItem('userId') ?? generateUserId();
     }
     return generateUserId();
 };
