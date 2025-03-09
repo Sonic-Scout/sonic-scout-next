@@ -2,6 +2,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 const ChatMessage = ({ sender, content, timestamp, isBot, url }) => {
   // Function to detect URLs in text and make them clickable
@@ -64,11 +65,18 @@ const ChatMessage = ({ sender, content, timestamp, isBot, url }) => {
         </div>
         
         <div className={`prose dark:prose-invert !max-w-[100vw] ${!isBot ? "ml-auto" : "mr-auto"}`}>
-          {content.split('\n').map((line, i) => (
-            <p key={i} className={`${!isBot && "text-right"}`}>
-              {renderTextWithLinks(line)}
-            </p>
-          ))}
+          {isBot ? (
+            <ReactMarkdown>
+              {content}
+            </ReactMarkdown>
+          ) : (
+            // For user messages, keep the simple text rendering
+            content.split('\n').map((line, i) => (
+              <p key={i} className="text-right">
+                {renderTextWithLinks(line)}
+              </p>
+            ))
+          )}
           
           {/* Render URL button if provided */}
           {url && (

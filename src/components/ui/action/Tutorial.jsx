@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from 'next/image'
 
 export const Tutorial = ({ onClose }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -11,25 +12,26 @@ export const Tutorial = ({ onClose }) => {
   
   const slides = [
     {
-      title: "Welcome to SonicScout",
-      content: "Discover a new way to explore and manage your music collection with powerful tools and insights.",
-      color: "bg-gradient-to-br from-primary/20 to-primary/10"
+      title: "Welcome to SonicScout AI",
+      content: "Your AI-powered DeFi assistant. Explore, analyze, and invest in promising DeFi projects—all in one place.  ",
+      color: "bg-gradient-to-br from-primary/20 to-primary/10",
+      image: "/tut-1.png"
     },
-    {
-      title: "Discover New Features",
-      content: "Our intuitive interface makes it easy to organize, filter, and find exactly what you're looking for.",
-      color: "bg-gradient-to-br from-secondary/20 to-secondary/10"
-    },
-    {
-      title: "Personalized Experience",
-      content: "Customize your dashboard and get recommendations tailored to your unique music preferences.",
-      color: "bg-gradient-to-br from-accent/20 to-accent/10"
-    },
-    {
-      title: "Ready to Start",
-      content: "You're all set! Begin your musical journey and unlock the full potential of SonicScout.",
-      color: "bg-gradient-to-br from-primary/20 to-primary-foreground/10"
-    }
+    // {
+    //   title: "Discover New Features",
+    //   content: "Our intuitive interface makes it easy to organize, filter, and find exactly what you're looking for.",
+    //   color: "bg-gradient-to-br from-secondary/20 to-secondary/10"
+    // },
+    // {
+    //   title: "Personalized Experience",
+    //   content: "Customize your dashboard and get recommendations tailored to your unique music preferences.",
+    //   color: "bg-gradient-to-br from-accent/20 to-accent/10"
+    // },
+    // {
+    //   title: "Ready to Start",
+    //   content: "You're all set! Begin your musical journey and unlock the full potential of SonicScout.",
+    //   color: "bg-gradient-to-br from-primary/20 to-primary-foreground/10"
+    // }
   ];
 
   const nextSlide = () => {
@@ -108,10 +110,21 @@ export const Tutorial = ({ onClose }) => {
                   <p className="text-xl text-muted-foreground mb-8">{slide.content}</p>
                   
                   {/* Example UI element for visual interest */}
-                  <div className="w-full h-40 rounded-xl bg-background/50 backdrop-blur-sm shadow-lg mb-8 flex items-center justify-center">
-                    <div className="w-3/4 h-1/2 rounded-lg bg-primary/20 animate-pulse">
-                    {}
-                    </div>
+                  <div className="w-full max-h-48 rounded-xl shadow-lg mt-8 flex items-center justify-center">
+                    {slide.image ? (
+                      <Image
+                        src={slide.image}
+                        alt={slide.title}
+                        width={418}
+                        height={235}
+                        priority
+                        unoptimized={true}
+                        className="h-[235px] max-h-full max-w-full rounded-lg object-cover" />
+                    ) : (
+                      <div className="w-3/4 h-1/2 rounded-lg bg-primary/20 animate-pulse">
+                      </div>
+                    )}
+
                   </div>
                   
                   {/* <div className="text-sm text-muted-foreground">
