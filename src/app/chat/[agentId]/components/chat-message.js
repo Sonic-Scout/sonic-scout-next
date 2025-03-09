@@ -75,7 +75,7 @@ const ChatMessage = ({ sender, content, timestamp, isBot, url }) => {
               <Button 
                 variant={isBot ? "outline" : "secondary"}
                 size="sm" 
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 cursor-pointer"
                 onClick={() => window.open(url, '_blank', 'noopener,noreferrer')}
               >
                 <ExternalLink size={14} />

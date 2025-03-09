@@ -59,8 +59,8 @@ const Chat = (props) => {
     <div className="flex h-[calc(100vh-1rem)] w-full flex-col bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <ChatHeader />
       
-      <div id="chatContainer" className="relative flex-1 p-4 pb-0 overflow-hidden">
-        <ScrollArea ref={scrollAreaRef} className="h-full">
+      <div id="chatContainer" className="relative flex-1 px-8 pt-4 pb-0 overflow-hidden">
+        <ScrollArea ref={scrollAreaRef} className="h-full pr-6">
           <div className="space-y-5">
             {formattedMessages.map((message) => (
               <ChatMessage 
