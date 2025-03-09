@@ -2,6 +2,7 @@
 import { configDotenv } from "dotenv";
 const ENV = configDotenv()?.parsed;
 const BASE_URL = ENV?.ELIZA_URL || `http://localhost:3000`;
+console.log(`BASE_URL >>>`, BASE_URL);
 
 const fetcher = async ({
     url,

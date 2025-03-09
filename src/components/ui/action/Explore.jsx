@@ -23,13 +23,13 @@ export const Explore = ({ onClose }) => {
   const handleCheckBalance = () => {
     sendMessage("check my balance");
     onClose();
-    router.push("/chat");
+    // router.push("/chat");
   };
 
   const handleTransfer = () => {
     updateInputMessage("I want to transfer [amount] to [wallet address]");
     onClose();
-    router.push("/chat");
+    // router.push("/chat");
   };
   
   const actions = [
