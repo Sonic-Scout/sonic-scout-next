@@ -15,8 +15,6 @@ const Chat = (props) => {
   useEffect(() => {
     setUserAgentId(userAgentId);
     if(!elizaAgentId || !Ai) return;
-    console.log(`elizaAgentId: ${elizaAgentId}`);
-    console.log(`userAgentId: ${Ai}`);
     if (messages.length === 0) {
       sendMessage("Greetings! I am here to assist you with all aspects of tokenomics. From analyzing token distribution to optimizing market strategies, I'm ready to help you achieve your crypto project's goals.\nHow can I assist you today?", true);
     }
@@ -35,6 +33,7 @@ const Chat = (props) => {
     content: msg.content,
     timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     isBot: msg.role === 'assistant',
+    url: msg.url || null, // Add support for URL
   }));
 
   return (
@@ -50,7 +49,8 @@ const Chat = (props) => {
                 sender={message.sender} 
                 content={message.content} 
                 timestamp={message.timestamp} 
-                isBot={message.isBot} 
+                isBot={message.isBot}
+                url={message.url} // Pass URL to ChatMessage
               />
             ))}
             {isLoading && (
