@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import {v4 as uuid } from "uuid";
+import { getUserId } from "@/lib/userIdApi";
 
 function FloatingPaths({ position }) {
   const paths = Array.from({ length: 36 }, (_, i) => ({
@@ -57,7 +57,7 @@ export default function BackgroundPaths() {
   const title = "Sonic Scout";
   const subtitle = "AI Agent on Sonic Chain";
   const words = title.split(" ");
-  const UUID = uuid();
+  const UUID = getUserId();
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-background to-background/80 dark:from-background dark:to-background/90">
@@ -150,18 +150,13 @@ export default function BackgroundPaths() {
             transition={{ delay: 1.5, duration: 0.8 }}
             className="flex flex-col md:flex-row gap-4 justify-center items-center mb-8"
           >
-            <div
-              className="inline-block group relative bg-gradient-to-r from-primary to-primary/80 
-                p-[2px] rounded-2xl backdrop-blur-lg overflow-hidden shadow-lg hover:shadow-xl 
-                transition-shadow duration-300"
-            >
               <Button
                 variant="ghost"
                 className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md 
                   bg-white/95 hover:bg-white/100 dark:bg-black/90 dark:hover:bg-black/100 
                   text-primary hover:text-primary dark:text-primary dark:hover:text-primary transition-all duration-300 
                   group-hover:-translate-y-0.5 border border-transparent
-                  hover:shadow-md dark:hover:shadow-primary/20"
+                  hover:shadow-md dark:hover:shadow-primary/20 cursor-pointer"
                 onClick={() => router.push(`/chat/${UUID}`)}
               >
                 <span className="opacity-90 group-hover:opacity-100 transition-opacity">
@@ -174,7 +169,6 @@ export default function BackgroundPaths() {
                   →
                 </span>
               </Button>
-            </div>
           </motion.div>
 
           <motion.div 

@@ -3,6 +3,8 @@ const BASE_URL = process?.env?.NEXT_PUBLIC_ELIZA_URL ?? `https://api.sonicscout.
 console.log(`BASE_URL >>>`, process.env.NEXT_PUBLIC_ELIZA_URL);
 console.log(`TEST DOANG`);
 
+// https://www.npmjs.com/package/@elizaos/client-direct?activeTab=code
+
 const fetcher = async ({
     url,
     method,
@@ -63,11 +65,13 @@ export const apiClient = {
     sendMessage: (
         agentId,
         message,
-        selectedFile
+        selectedFile,
+        userId 
     ) => {
         const formData = new FormData();
         formData.append("text", message);
         formData.append("user", "user");
+        formData.append("userId", userId );
 
         if (selectedFile) {
             formData.append("file", selectedFile);

@@ -50,7 +50,7 @@ export function ChatProvider({ children }) {
         }
         
         // Call API with the active agent ID and message
-        const response = await apiClient.sendMessage(activeAgentId, message, selectedFile);
+        const response = await apiClient.sendMessage(activeAgentId, message, selectedFile, userAgentId);
         
         // Handle array response format
         if (Array.isArray(response)) {
