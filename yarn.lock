@@ -3843,6 +3843,14 @@ motion@10.16.2:
     "@motionone/utils" "^10.15.1"
     "@motionone/vue" "^10.16.2"
 
+motion@^12.4.10:
+  version "12.4.10"
+  resolved "https://registry.yarnpkg.com/motion/-/motion-12.4.10.tgz#d00c2b2c777032d1ac0d91ba2a7dd5bc602f6f54"
+  integrity sha512-AM21Lyfn7ZHO+nBuHJEA2REFgS3kUM83CLZnzM0ZY1/sVeKGkCtV4LF4O/YsQXyZ9mrUrrnTaUkKquS4eaIYjg==
+  dependencies:
+    framer-motion "^12.4.10"
+    tslib "^2.4.0"
+
 ms@^2.1.1, ms@^2.1.3:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"

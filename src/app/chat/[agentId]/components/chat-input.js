@@ -3,6 +3,7 @@ import { useChat } from "@/context/ChatContext";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { SendIcon } from "lucide-react";
+import { BorderBeam } from "@/components/magicui/border-beam";
 
 const ChatInput = ({ onSendMessage, disabled }) => {
   const { inputMessage, updateInputMessage, clearInputMessage } = useChat();
@@ -25,21 +26,16 @@ const ChatInput = ({ onSendMessage, disabled }) => {
   return (
     <div className="border-t p-4 bg-card/30">
       <form className="flex gap-2 items-end" onSubmit={handleSubmit}>
-        <div className="flex-1 relative overflow-hidden">
-          <div className="pointer-events-none absolute inset-[0] rounded-[inherit] [border:calc(var(--border-width)*1px)_solid_transparent] ![mask-clip:padding-box,border-box] ![mask-composite:intersect] [mask:linear-gradient(transparent,transparent),linear-gradient(white,white)] after:absolute after:aspect-square after:w-[calc(var(--size)*1px)] after:animate-border-beam after:[animation-delay:var(--delay)] after:[background:linear-gradient(to_left,var(--color-from),var(--color-to),transparent)] after:[offset-anchor:calc(var(--anchor)*1%)_50%] after:[offset-path:rect(0_auto_auto_0_round_calc(var(--size)*1px))] rounded-xl" 
-            style={{
-              "--border-width": 1.5,
-              "--size": 150,
-              "--color-from": "#ffaa40",
-              "--color-to": "#9c40ff",
-              "--delay": "0s",
-              "--anchor": 90,
-              "--duration": 12
-            }}
-          />
-          
+        <div className="flex-1 relative overflow-hidden rounded-xl">
+        <BorderBeam
+        duration={12}
+        size={100}
+        reverse
+        className="from-transparent via-[#ea580c] to-transparent"
+      />
+
           <Textarea
-            className="min-h-20 max-h-[200px] pr-10 resize-none rounded-xl transition-all focus-visible:ring-0"
+            className="min-h-20 max-h-[200px] pr-10 resize-none rounded-xl transition-all focus-visible:ring-0 focus-visible:border-primary/30"
             placeholder="Type your message..."
             value={inputMessage}
             onChange={(e) => updateInputMessage(e.target.value)}
