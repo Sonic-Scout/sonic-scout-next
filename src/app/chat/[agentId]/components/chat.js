@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ChatHeader from "./chat-header";
 import ChatMessage from "./chat-message";
@@ -8,8 +8,27 @@ import { useChat } from "@/context/ChatContext";
 
 const Chat = (props) => {
   const { agentId: userAgentId } = props;
-  const { messages, isLoading, sendMessage, setUserAgentId, userAgentId: Ai, elizaAgentId  } = useChat();
+  const { messages, isLoading, sendMessage, setUserAgentId, userAgentId: Ai, elizaAgentId } = useChat();
+  const messagesEndRef = useRef(null);
+  const scrollAreaRef = useRef(null);
 
+  // Function to scroll to the latest message
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      // Use scrollIntoView for smooth scrolling
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Auto-scroll when messages change
+  useEffect(() => {
+    // Small delay to ensure DOM is updated
+    const timer = setTimeout(() => {
+      scrollToBottom();
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [messages]);
 
   // Add initial welcome message if there are no messages
   useEffect(() => {
@@ -41,7 +60,7 @@ const Chat = (props) => {
       <ChatHeader />
       
       <div id="chatContainer" className="relative flex-1 p-4 pb-0 overflow-hidden">
-        <ScrollArea className="h-full">
+        <ScrollArea ref={scrollAreaRef} className="h-full">
           <div className="space-y-5">
             {formattedMessages.map((message) => (
               <ChatMessage 
@@ -58,6 +77,8 @@ const Chat = (props) => {
                 <div className="animate-pulse">SonicScout is typing...</div>
               </div>
             )}
+            {/* Empty div at the end to scroll to */}
+            <div ref={messagesEndRef} />
           </div>
         </ScrollArea>
       </div>
